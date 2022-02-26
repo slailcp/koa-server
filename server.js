@@ -23,6 +23,13 @@ app.use(
     })
 );
 
+// 当服务期被访问的时候,打印出请求类型以及请求的url;
+app.use(async (ctx, next) => {
+    console.log(`${ctx.request.method} ${ctx.request.url}`);
+    await next();
+});
+
+
 
 // post请求
 router.post('/api/postUser', async (ctx, next) => {
@@ -67,7 +74,7 @@ router.post('/api/getUser', async (ctx, next) => {
 });
 
 // get请求
-router.post('/api/getList', async (ctx, next) => {
+router.get('/api/getList', async (ctx, next) => {
     ctx.response.body = {
         Data: [
             { key: 0, value: "blue" },
