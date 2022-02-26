@@ -47,7 +47,7 @@
     }
 
     function getList() {
-        axios.post(BASE_URL + '/api/getList').then(ret => {
+        axios.get(BASE_URL + '/api/getList').then(ret => {
             console.log(ret.data);
             document.querySelector("#content").innerHTML = JSON.stringify(ret.data)
         })
