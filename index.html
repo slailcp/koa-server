@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div>注册</div>
+    姓名<input type="text" id="username" autocomplete="off"> <br />
+    密码<input type="text" id="password"><br /><br />
+    <input type="button" value="post提交" onclick="submit()">
+    <input type="button" value="post获取所有人" onclick="getuserinfo()"><br /><br />
+    <input type="button" value="post获取'张三'" onclick="getuserinfo('张三')">
+    <input type="button" value="get请求" onclick="getList()"><br /><br />
+    <div id="content">
+
+    </div>
+</body>
+
+</html>
+<script>
+    const BASE_URL = 'http://192.11.11.11:2255';
+    function submit() {
+        axios.post(BASE_URL + '/api/postUser',
+            {
+                username: document.querySelector('#username').value,
+                password: document.querySelector('#password').value
+            }).then(ret => {
+                console.log(ret.data);
+                document.querySelector("#content").innerHTML = JSON.stringify(ret.data)
+            })
+    }
+
+    function getuserinfo(username) {
+        axios.post(BASE_URL + '/api/getUser',
+            {
+                username: username || ""
+            }).then(ret => {
+                console.log(ret.data);
+                document.querySelector("#content").innerHTML = JSON.stringify(ret.data)
+            })
+    }
+
+    function getList() {
+        axios.post(BASE_URL + '/api/getList').then(ret => {
+            console.log(ret.data);
+            document.querySelector("#content").innerHTML = JSON.stringify(ret.data)
+        })
+    }
+
+</script>
