@@ -1,3 +1,5 @@
+# mock 数据流程
+
 先ipconfig 查看自己电脑的ip，然后再server.js里面和index.html配置  host
 
 根目录下运行 node server.js
